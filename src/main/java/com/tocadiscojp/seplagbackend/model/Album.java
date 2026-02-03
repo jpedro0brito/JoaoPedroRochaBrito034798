@@ -1,6 +1,8 @@
 package com.tocadiscojp.seplagbackend.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,7 +26,7 @@ public class Album {
 
     @ManyToMany(mappedBy = "albuns")
     @JsonIgnore
-    private List<Artista> artistas;
+    private List<Artista> artistas = new ArrayList<>();
 
     public Album() {
     }

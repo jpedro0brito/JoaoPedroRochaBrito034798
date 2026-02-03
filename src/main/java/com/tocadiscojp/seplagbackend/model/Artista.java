@@ -1,6 +1,8 @@
 package com.tocadiscojp.seplagbackend.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +22,7 @@ public class Artista {
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "artista_album", joinColumns = @JoinColumn(name = "artista_id"), inverseJoinColumns = @JoinColumn(name = "album_id"))
-    private List<Album> albuns;
+    private List<Album> albuns = new ArrayList<>();
 
     public Artista() {
     }
@@ -60,5 +62,10 @@ public class Artista {
 
     public void setAlbuns(List<Album> albuns) {
         this.albuns = albuns;
+    }
+
+    public void adicionarAlbum(Album album) {
+        this.albuns.add(album);
+        album.getArtistas().add(this);
     }
 }

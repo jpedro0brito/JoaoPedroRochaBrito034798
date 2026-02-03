@@ -4,8 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.tocadiscojp.seplagbackend.dto.AlbumRequest;
@@ -21,10 +23,15 @@ public class AlbumService {
 
     private final AlbumRepository albumRepository;
     private final ArtistaRepository artistaRepository;
+    private final MinioService minioService;
 
-    public AlbumService(AlbumRepository albumRepository, ArtistaRepository artistaRepository) {
+    public AlbumService(
+            AlbumRepository albumRepository,
+            ArtistaRepository artistaRepository,
+            MinioService minioService) {
         this.albumRepository = albumRepository;
         this.artistaRepository = artistaRepository;
+        this.minioService = minioService;
     }
 
     public Page<AlbumResponse> listarTodos(Pageable pageable) {
@@ -51,16 +58,34 @@ public class AlbumService {
         return toResponse(albumSalvo);
     }
 
+    @Transactional
+    public AlbumResponse atualizarCapa(UUID id, MultipartFile file) {
+        Album album = albumRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Álbum não encontrado"));
+
+        String nomeDoArquivo = minioService.enviarArquivo(file);
+
+        album.setCapaUrl(nomeDoArquivo);
+        albumRepository.save(album);
+
+        return toResponse(album);
+    }
+
     private AlbumResponse toResponse(Album entity) {
         List<ArtistaResponse> artistasDto = entity.getArtistas().stream()
                 .map(a -> new ArtistaResponse(a.getId(), a.getNome(), a.getGeneroMusical()))
                 .collect(Collectors.toList());
 
+        String urlAssinada = null;
+        if (entity.getCapaUrl() != null && !entity.getCapaUrl().isEmpty()) {
+            urlAssinada = minioService.obterUrlPreAssinada(entity.getCapaUrl());
+        }
+
         return new AlbumResponse(
                 entity.getId(),
                 entity.getTitulo(),
                 entity.getAnoLancamento(),
-                entity.getCapaUrl(),
+                urlAssinada,
                 artistasDto);
     }
 }

@@ -104,6 +104,14 @@ public class AlbumService {
         return toResponse(albumRepository.save(album));
     }
 
+    @Transactional
+    public void desativar(UUID id) {
+        Album album = albumRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Álbum não encontrado"));
+        album.setAtivo(false);
+        albumRepository.save(album);
+    }
+
     private AlbumResponse toResponse(Album entity) {
         List<ArtistaResponse> artistasDto = entity.getArtistas().stream()
                 .map(a -> new ArtistaResponse(a.getId(), a.getNome(), a.getGeneroMusical(), a.getTipo()))

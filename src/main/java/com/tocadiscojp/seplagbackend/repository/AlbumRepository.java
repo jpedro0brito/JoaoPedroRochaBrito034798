@@ -14,17 +14,19 @@ import java.util.UUID;
 
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, UUID> {
-    @Query(value = "SELECT DISTINCT a FROM Album a " +
-            "LEFT JOIN a.artistas ar " +
-            "WHERE (:tipo IS NULL OR ar.tipo = :tipo) " +
-            "AND (:nomeArtista IS NULL OR :nomeArtista = '' OR LOWER(ar.nome) LIKE LOWER(:nomeArtista))",
+        @Query(value = "SELECT DISTINCT a FROM Album a " +
+                        "LEFT JOIN a.artistas ar " +
+                        "WHERE a.ativo = TRUE " +
+                        "AND (:tipo IS NULL OR ar.tipo = :tipo) " +
+                        "AND (:nomeArtista IS NULL OR :nomeArtista = '' OR LOWER(ar.nome) LIKE LOWER(:nomeArtista))",
 
-            countQuery = "SELECT count(DISTINCT a) FROM Album a " +
-                    "LEFT JOIN a.artistas ar " +
-                    "WHERE (:tipo IS NULL OR ar.tipo = :tipo) " +
-                    "AND (:nomeArtista IS NULL OR :nomeArtista = '' OR LOWER(ar.nome) LIKE LOWER(:nomeArtista))")
-    Page<Album> buscarComFiltros(
-            @Param("tipo") TipoArtista tipo,
-            @Param("nomeArtista") String nomeArtista,
-            Pageable pageable);
+                        countQuery = "SELECT count(DISTINCT a) FROM Album a " +
+                                        "LEFT JOIN a.artistas ar " +
+                                        "WHERE a.ativo = TRUE " +
+                                        "AND (:tipo IS NULL OR ar.tipo = :tipo) " +
+                                        "AND (:nomeArtista IS NULL OR :nomeArtista = '' OR LOWER(ar.nome) LIKE LOWER(:nomeArtista))")
+        Page<Album> buscarComFiltros(
+                        @Param("tipo") TipoArtista tipo,
+                        @Param("nomeArtista") String nomeArtista,
+                        Pageable pageable);
 }

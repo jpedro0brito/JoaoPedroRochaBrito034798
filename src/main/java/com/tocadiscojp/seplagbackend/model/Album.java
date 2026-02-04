@@ -28,6 +28,8 @@ public class Album {
     @JsonIgnore
     private List<Artista> artistas = new ArrayList<>();
 
+    private boolean ativo = true;
+
     public Album() {
     }
 
@@ -74,5 +76,13 @@ public class Album {
 
     public void setArtistas(List<Artista> artistas) {
         this.artistas = artistas;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

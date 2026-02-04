@@ -30,6 +30,8 @@ public class Artista {
     @Column(length = 20)
     private TipoArtista tipo;
 
+    private boolean ativo = true;
+
     public Artista() {
     }
 
@@ -82,5 +84,13 @@ public class Artista {
     public void adicionarAlbum(Album album) {
         this.albuns.add(album);
         album.getArtistas().add(this);
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

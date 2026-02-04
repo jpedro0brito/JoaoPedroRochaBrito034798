@@ -16,11 +16,12 @@ import java.util.UUID;
 
 @Repository
 public interface ArtistaRepository extends JpaRepository<Artista, UUID> {
-        Page<Artista> findByNomeContainingIgnoreCase(String nome, Pageable pageable);
+        Page<Artista> findByNomeContainingIgnoreCaseAndAtivoTrue(String nome, Pageable pageable);
 
         @Query("SELECT a FROM Artista a WHERE " +
+                        "a.ativo = TRUE AND " +
                         "(:tipo IS NULL OR a.tipo = :tipo) AND " +
-                        "(:nome IS NULL OR LOWER(a.nome) LIKE LOWER(CONCAT('%', :nome, '%')))")
+                        "(:nome IS NULL OR :nome = '' OR LOWER(a.nome) LIKE LOWER(CONCAT('%', :nome, '%')))")
         List<Artista> buscarComFiltros(
                         @Param("tipo") TipoArtista tipo,
                         @Param("nome") String nome,

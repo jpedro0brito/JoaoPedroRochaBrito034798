@@ -73,4 +73,11 @@ public class AlbumController {
             @Parameter(description = " Dados do álbum a ser atualizado") @RequestBody AlbumRequest request) {
         return ResponseEntity.ok(service.atualizar(id, request));
     }
+
+    @Operation(summary = "Desativar álbum", description = "Remover ou desativar um álbum do catálogo")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> desativar(@PathVariable UUID id) {
+        service.desativar(id);
+        return ResponseEntity.noContent().build();
+    }
 }

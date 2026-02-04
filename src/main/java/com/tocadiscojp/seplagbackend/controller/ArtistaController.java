@@ -50,4 +50,11 @@ public class ArtistaController {
             @Parameter(description = "Dados do artista a ser atualizado") @RequestBody @Valid ArtistaRequest request) {
         return ResponseEntity.ok(service.alterar(id, request));
     }
+
+    @Operation(summary = "Remover ou desativar artista", description = "Remover ou desativar um artista do catálogo")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> remover(@PathVariable UUID id) {
+        service.removerOuDesativar(id);
+        return ResponseEntity.noContent().build();
+    }
 }

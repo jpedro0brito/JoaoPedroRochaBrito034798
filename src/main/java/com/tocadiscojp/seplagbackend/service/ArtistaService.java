@@ -48,6 +48,24 @@ public class ArtistaService {
                 .toList();
     }
 
+    @Transactional
+    public void removerOuDesativar(UUID id) {
+        Artista artista = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Artista não encontrado"));
+
+        if (artista.getAlbuns() == null || artista.getAlbuns().isEmpty()) {
+            repository.delete(artista);
+        } else {
+            artista.setAtivo(false);
+
+            artista.getAlbuns().forEach(album -> {
+                album.setAtivo(false);
+            });
+
+            repository.save(artista);
+        }
+    }
+
     private ArtistaResponse toResponse(Artista artista) {
         return new ArtistaResponse(
                 artista.getId(),

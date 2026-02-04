@@ -1,37 +1,31 @@
-# API de Gerenciamento Musical - Seplag Backend
+# Music Management API - Seplag Backend
 
----
-
-## Decisões de Arquitetura e Tecnologias
-
-A escolha das tecnologias baseou-se no padrão de mercado para sistemas resilientes:
-
-* **Java 17 & Spring Boot 3.5:** Utilização de *Records* para DTOs (imutabilidade) e o novo *RestClient* para integrações externas.
-* **PostgreSQL & Flyway:** Banco de dados relacional robusto com versionamento de schema para garantir que o ambiente de produção seja idêntico ao de desenvolvimento.
-* **MinIO (S3 API):** Escolha estratégica para simular armazenamento em nuvem (AWS S3) localmente, garantindo que a aplicação seja *Cloud-Ready*.
-* **JWT + Refresh Token:** Implementação de segurança em duas camadas. O *Access Token* curto (5 min) minimiza riscos, enquanto o *Refresh Token* garante uma boa experiência ao usuário.
-* **Bucket4j (Rate Limit):** Implementado para prevenir abusos de API e ataques de negação de serviço (DoS).
+* **Java 17 & Spring Boot 3.5:** Uso das versões mais estáveis e modernas para aproveitar *Records* (imutabilidade nos DTOs) e *RestClient* (fluidez em chamadas externas).
+* **Security com JWT & Refresh Token:** Implementação de um fluxo seguro de renovação de sessão, respeitando a expiração de 5 minutos sem prejudicar a experiência do usuário.
+* **Armazenamento Cloud-Native (MinIO/S3):** Em vez de salvar arquivos no sistema local, utilizamos a API S3. Isso permite que a aplicação seja escalada horizontalmente sem perda de arquivos.
+* **Flyway Migrations:** Gestão rigorosa do banco de dados, permitindo a evolução do schema (como a adição do campo `ativo` e `tipo`) de forma versionada.
 
 ---
 
 ## Desafios Técnicos e Soluções
 
-Durante o desenvolvimento, enfrentamos e resolvemos desafios complexos de engenharia:
-
 ### 1. Sincronização de Regionais
 
-**O Desafio:** Consumir uma API externa e sincronizar com o banco local com regras de inativação e criação de novos registros para manter histórico.
-**A Solução:** Implementamos uma lógica de comparação em memória utilizando *Maps* para garantir complexidade , evitando múltiplas consultas desnecessárias ao banco de dados durante o loop de sincronização.
+**Problema:** Consumir uma API externa e refletir as mudanças no banco local sem gerar duplicidade ou perda de dados.
+**Solução:** Implementada uma lógica de sincronização que identifica novos registros, inativa registros ausentes e trata atualizações de atributos (inativando o antigo e criando o novo para preservar o histórico).
 
-### 2. Busca Avançada N:N com Paginação
+### 2. Busca N:N Paginada com Integridade
 
-**O Desafio:** Filtrar álbuns por tipo de artista (SOLO/BANDA) ou nome, mantendo a paginação do Spring Data correta.
-**A Solução:** O uso de `DISTINCT` em relacionamentos Many-to-Many causa problemas no cálculo de páginas do Hibernate. Resolvemos isso utilizando `LEFT JOIN` e definindo um `countQuery` customizado no repositório, garantindo que o contador de registros seja preciso mesmo com filtros complexos.
+**Problema:** O uso de `JOIN` em relacionamentos Muitos-para-Muitos costuma causar erros na contagem de páginas e duplicidade de registros.
+**Solução:** Refinamos o `AlbumRepository` com `LEFT JOIN` e `countQuery` customizados. Isso garantiu que o filtro por nome do artista ou tipo (SOLO/BANDA) funcione perfeitamente com a paginação nativa do Spring.
 
-### 3. Observabilidade Real (Health Checks)
+### 3. Estratégia de Soft Delete
 
-**O Desafio:** O Health Check padrão do Spring diz que a app está "UP" mesmo se o storage (MinIO) cair.
-**A Solução:** Criamos um `MinioHealthIndicator` customizado. Agora, o endpoint `/actuator/health` valida se o banco **e** o storage estão respondendo, permitindo que orquestradores (Kubernetes/Docker) tomem decisões reais de Liveness e Readiness.
+**Problema:** Remover um artista que possui álbuns vinculados causaria inconsistência.
+**Solução:** Adotamos o *Soft Delete*.
+
+* **Álbuns:** Apenas desativados.
+* **Artistas:** Se não houver vínculos, remoção física. Se houver álbuns, o artista e todos os seus álbuns são desativados em cascata, preservando a integridade referencial.
 
 ---
 

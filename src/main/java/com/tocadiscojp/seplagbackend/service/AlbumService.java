@@ -2,6 +2,7 @@ package com.tocadiscojp.seplagbackend.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,14 +25,17 @@ public class AlbumService {
     private final AlbumRepository albumRepository;
     private final ArtistaRepository artistaRepository;
     private final MinioService minioService;
+    private final SimpMessagingTemplate messagingTemplate;
 
     public AlbumService(
             AlbumRepository albumRepository,
             ArtistaRepository artistaRepository,
-            MinioService minioService) {
+            MinioService minioService,
+            SimpMessagingTemplate messagingTemplate) {
         this.albumRepository = albumRepository;
         this.artistaRepository = artistaRepository;
         this.minioService = minioService;
+        this.messagingTemplate = messagingTemplate;
     }
 
     public Page<AlbumResponse> listarTodos(Pageable pageable) {
@@ -54,6 +58,9 @@ public class AlbumService {
         }
 
         Album albumSalvo = albumRepository.save(album);
+
+        String mensagem = "Novo álbum cadastrado: " + albumSalvo.getTitulo();
+        messagingTemplate.convertAndSend("/topic/albuns", mensagem);
 
         return toResponse(albumSalvo);
     }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Teste WebSocket</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+
+<body>
+    <h2>Monitor de Álbuns (WebSocket)</h2>
+    <div id="mensagens" style="border: 1px solid #ccc; padding: 10px; height: 300px;"></div>
+
+    <script type="text/javascript">
+        var socket = new SockJS('http://localhost:8080/ws');
+        var stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function (frame) {
+            console.log('Conectado: ' + frame);
+            document.getElementById("mensagens").innerHTML += "<p style='color:green'>Conectado ao servidor!</p>";
+
+            stompClient.subscribe('/topic/albuns', function (notificacao) {
+                var msg = notificacao.body;
+                document.getElementById("mensagens").innerHTML += "<p>🔔 " + msg + "</p>";
+            });
+        });
+    </script>
+</body>
+
+</html>

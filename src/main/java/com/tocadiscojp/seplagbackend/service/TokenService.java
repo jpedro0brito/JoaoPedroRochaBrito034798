@@ -20,31 +20,31 @@ public class TokenService {
     private String secret;
 
     public String gerarToken(Usuario usuario) {
-        try {
-            SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        long expiracao = 5 * 60 * 1000; // 5 minutos
+        return gerarTokenGenerico(usuario, expiracao);
+    }
 
-            long tempoExpiracao = 5 * 60 * 1000; // 5 minutos em milissegundos
-            Date expirationDate = new Date(System.currentTimeMillis() + tempoExpiracao);
+    public String gerarRefreshToken(Usuario usuario) {
+        long expiracao = 30 * 60 * 1000; // 30 minutos
+        return gerarTokenGenerico(usuario, expiracao);
+    }
 
-            return Jwts.builder()
-                    .setIssuer("API Seplag")
-                    .setSubject(usuario.getUsername())
-                    .claim("id", usuario.getId())
-                    .setExpiration(expirationDate)
-                    .signWith(key, SignatureAlgorithm.HS256)
-                    .compact();
+    private String gerarTokenGenerico(Usuario usuario, long tempoExpiracao) {
+        Date expirationDate = new Date(System.currentTimeMillis() + tempoExpiracao);
 
-        } catch (Exception exception) {
-            throw new RuntimeException("Erro ao gerar token JWT", exception);
-        }
+        return Jwts.builder()
+                .setIssuer("API Seplag")
+                .setSubject(usuario.getUsername())
+                .claim("id", usuario.getId())
+                .setExpiration(expirationDate)
+                .signWith(getChave(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     public String getSubject(String tokenJWT) {
         try {
-            SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-
             return Jwts.parserBuilder()
-                    .setSigningKey(key)
+                    .setSigningKey(getChave())
                     .build()
                     .parseClaimsJws(tokenJWT)
                     .getBody()
@@ -52,5 +52,9 @@ public class TokenService {
         } catch (Exception exception) {
             return null;
         }
+    }
+
+    private SecretKey getChave() {
+        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 }

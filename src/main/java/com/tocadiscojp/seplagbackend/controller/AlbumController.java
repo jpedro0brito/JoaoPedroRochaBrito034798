@@ -45,4 +45,9 @@ public class AlbumController {
         AlbumResponse albumAtualizado = service.atualizarCapa(id, file);
         return ResponseEntity.ok(albumAtualizado);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<AlbumResponse> atualizar(@PathVariable UUID id, @RequestBody AlbumRequest request) {
+        return ResponseEntity.ok(service.atualizar(id, request));
+    }
 }

@@ -71,6 +71,25 @@ public class AlbumService {
         return toResponse(album);
     }
 
+    @Transactional
+    public AlbumResponse atualizar(UUID id, AlbumRequest request) {
+        Album album = albumRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Álbum não encontrado"));
+
+        album.setTitulo(request.titulo());
+        album.setAnoLancamento(request.anoLancamento());
+
+        if (request.artistasIds() != null && !request.artistasIds().isEmpty()) {
+            List<Artista> novosArtistas = artistaRepository.findAllById(request.artistasIds());
+
+            for (Artista a : novosArtistas) {
+                a.adicionarAlbum(album);
+            }
+        }
+
+        return toResponse(albumRepository.save(album));
+    }
+
     private AlbumResponse toResponse(Album entity) {
         List<ArtistaResponse> artistasDto = entity.getArtistas().stream()
                 .map(a -> new ArtistaResponse(a.getId(), a.getNome(), a.getGeneroMusical()))

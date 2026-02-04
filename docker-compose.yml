@@ -17,6 +17,7 @@ services:
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
       MINIO_BUCKET_NAME: capas-albuns
+      API_SECURITY_TOKEN_SECRET: b852f260-d799-4db3-9ce9-56b6195220a8
     depends_on:
       - db
       - minio

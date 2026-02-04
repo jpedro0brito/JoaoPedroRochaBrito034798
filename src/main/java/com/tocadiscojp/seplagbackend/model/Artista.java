@@ -33,9 +33,10 @@ public class Artista {
     public Artista() {
     }
 
-    public Artista(String nome, String generoMusical) {
+    public Artista(String nome, String generoMusical, TipoArtista tipo) {
         this.nome = nome;
         this.generoMusical = generoMusical;
+        this.tipo = tipo;
     }
 
     public UUID getId() {

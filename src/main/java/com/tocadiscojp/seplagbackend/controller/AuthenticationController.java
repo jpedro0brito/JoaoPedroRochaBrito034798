@@ -19,8 +19,9 @@ import com.tocadiscojp.seplagbackend.service.TokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
-@Tag(name = "3. Autenticação", description = "Endpoints para autenticação de usuários")
+@Tag(name = "4. Autenticação", description = "Endpoints para autenticação de usuários")
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
@@ -41,7 +42,7 @@ public class AuthenticationController {
     @Operation(summary = "Efetuar login", description = "Ação de login do usuário")
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> efetuarLogin(
-            @Parameter(description = "Dados de login do usuário") @RequestBody LoginRequest dados) {
+            @Parameter(description = "Dados de login do usuário") @RequestBody @Valid LoginRequest dados) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var authentication = manager.authenticate(authenticationToken);
         Usuario usuario = (Usuario) authentication.getPrincipal();

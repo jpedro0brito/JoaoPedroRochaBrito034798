@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 import com.tocadiscojp.seplagbackend.dto.AlbumRequest;
 import com.tocadiscojp.seplagbackend.dto.AlbumResponse;
@@ -51,7 +52,7 @@ public class AlbumController {
     @Operation(summary = "Cadastrar álbum", description = "Salvar um novo álbum no catálogo.")
     @PostMapping
     public ResponseEntity<AlbumResponse> cadastrar(
-            @Parameter(description = "Dados do álbum a ser cadastrado") @RequestBody AlbumRequest request) {
+            @Parameter(description = "Dados do álbum a ser cadastrado") @RequestBody @Valid AlbumRequest request) {
         AlbumResponse novoAlbum = service.cadastrar(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoAlbum);
     }

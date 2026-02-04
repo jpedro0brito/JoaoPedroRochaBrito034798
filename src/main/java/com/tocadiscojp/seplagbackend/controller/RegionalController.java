@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "2. Regionais", description = "Sincronização de dados de novas regionais")
+@Tag(name = "3. Regionais", description = "Sincronização de dados de novas regionais")
 @RestController
 @RequestMapping("/v1/regionais")
 public class RegionalController {

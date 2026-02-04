@@ -16,6 +16,11 @@ import com.tocadiscojp.seplagbackend.model.Usuario;
 import com.tocadiscojp.seplagbackend.repository.UsuarioRepository;
 import com.tocadiscojp.seplagbackend.service.TokenService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+@Tag(name = "3. Autenticação", description = "Endpoints para autenticação de usuários")
 @RestController
 @RequestMapping("/auth")
 public class AuthenticationController {
@@ -33,8 +38,10 @@ public class AuthenticationController {
         this.usuarioRepository = usuarioRepository;
     }
 
+    @Operation(summary = "Efetuar login", description = "Ação de login do usuário")
     @PostMapping("/login")
-    public ResponseEntity<TokenResponse> efetuarLogin(@RequestBody LoginRequest dados) {
+    public ResponseEntity<TokenResponse> efetuarLogin(
+            @Parameter(description = "Dados de login do usuário") @RequestBody LoginRequest dados) {
         var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
         var authentication = manager.authenticate(authenticationToken);
         Usuario usuario = (Usuario) authentication.getPrincipal();
@@ -45,8 +52,10 @@ public class AuthenticationController {
         return ResponseEntity.ok(new TokenResponse(accessToken, refreshToken));
     }
 
+    @Operation(summary = "Refresh token", description = "Atualiza o token de acesso")
     @PostMapping("/refresh")
-    public ResponseEntity<TokenResponse> refreshToken(@RequestBody RefreshTokenRequest request) {
+    public ResponseEntity<TokenResponse> refreshToken(
+            @Parameter(description = "Dados do refresh token") @RequestBody RefreshTokenRequest request) {
         String login = tokenService.getSubject(request.refreshToken());
 
         if (login == null) {

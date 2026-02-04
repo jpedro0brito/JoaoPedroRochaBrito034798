@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.tocadiscojp.seplagbackend.enums.TipoArtista;
+
 @Entity
 @Table(name = "artista")
 public class Artista {
@@ -23,6 +25,10 @@ public class Artista {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "artista_album", joinColumns = @JoinColumn(name = "artista_id"), inverseJoinColumns = @JoinColumn(name = "album_id"))
     private List<Album> albuns = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private TipoArtista tipo;
 
     public Artista() {
     }
@@ -58,6 +64,14 @@ public class Artista {
 
     public List<Album> getAlbuns() {
         return albuns;
+    }
+
+    public TipoArtista getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoArtista tipo) {
+        this.tipo = tipo;
     }
 
     public void setAlbuns(List<Album> albuns) {

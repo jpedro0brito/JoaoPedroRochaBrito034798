@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 import com.tocadiscojp.seplagbackend.dto.AlbumRequest;
 import com.tocadiscojp.seplagbackend.dto.AlbumResponse;
 import com.tocadiscojp.seplagbackend.dto.ArtistaResponse;
+import com.tocadiscojp.seplagbackend.enums.TipoArtista;
 import com.tocadiscojp.seplagbackend.model.Album;
 import com.tocadiscojp.seplagbackend.model.Artista;
 import com.tocadiscojp.seplagbackend.repository.AlbumRepository;
@@ -38,9 +39,15 @@ public class AlbumService {
         this.messagingTemplate = messagingTemplate;
     }
 
-    public Page<AlbumResponse> listarTodos(Pageable pageable) {
-        Page<Album> albuns = albumRepository.findAll(pageable);
-        return albuns.map(this::toResponse);
+    public Page<AlbumResponse> listarTodos(Pageable pageable, TipoArtista tipo, String nomeArtista) {
+        String filtroNome = null;
+
+        if (nomeArtista != null && !nomeArtista.isBlank()) {
+            filtroNome = "%" + nomeArtista + "%";
+        }
+
+        Page<Album> paginaAlbuns = albumRepository.buscarComFiltros(tipo, filtroNome, pageable);
+        return paginaAlbuns.map(this::toResponse);
     }
 
     @Transactional
@@ -99,7 +106,7 @@ public class AlbumService {
 
     private AlbumResponse toResponse(Album entity) {
         List<ArtistaResponse> artistasDto = entity.getArtistas().stream()
-                .map(a -> new ArtistaResponse(a.getId(), a.getNome(), a.getGeneroMusical()))
+                .map(a -> new ArtistaResponse(a.getId(), a.getNome(), a.getGeneroMusical(), a.getTipo()))
                 .collect(Collectors.toList());
 
         String urlAssinada = null;

@@ -1,0 +1,7 @@
+CREATE TABLE regional (
+    id SERIAL PRIMARY KEY,
+    id_externo INTEGER,
+    nome VARCHAR(200) NOT NULL,
+    ativo BOOLEAN DEFAULT TRUE,
+    data_sincronizacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

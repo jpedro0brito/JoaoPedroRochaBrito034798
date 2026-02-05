@@ -1,0 +1,201 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.tocadiscojp:seplag-backend >-------------------
+[INFO] Building seplag-backend 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ seplag-backend ---
+[INFO] Copying 2 resources from src\main\resources to target\classes
+[INFO] Copying 6 resources from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ seplag-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ seplag-backend ---
+[INFO] Copying 1 resource from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ seplag-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ seplag-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running Testes do MinioHealthIndicator
+./mvnw : OpenJDK 64-Bit 
+Server VM warning: Sharing 
+is only supported for boot 
+loader classes because 
+bootstrap classpath has been 
+appended
+No linha:1 caractere:1
++ ./mvnw test 2>&1 | 
+Out-File -FilePath 
+test-output.txt -Encoding 
+utf8
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo           
+   : NotSpecified: (OpenJDK  
+   64-Bit ...s been append   
+ ed:String) [], RemoteExc    
+eption
+    + FullyQualifiedErrorId  
+   : NativeCommandError
+ 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.108 s -- in Testes do MinioHealthIndicator
+[INFO] Running Testes do RateLimitInterceptor
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.387 s -- in Testes do RateLimitInterceptor
+[INFO] Running Testes do SecurityFilter
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.209 s -- in Testes do SecurityFilter
+[INFO] Running Testes do AlbumController
+21:32:06.273 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.tocadiscojp.seplagbackend.controller.AlbumControllerTest]: AlbumControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:32:06.521 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.tocadiscojp.seplagbackend.SeplagBackendApplication for test class com.tocadiscojp.seplagbackend.controller.AlbumControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.10)
+
+2026-02-04T21:32:06.899-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.AlbumControllerTest     : Starting AlbumControllerTest using Java 17.0.17 with PID 4600 (started by jpedr in C:\Users\jpedr\Documents\ProjetoCodigo\Pessoal\seplag-backend)
+2026-02-04T21:32:06.900-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.AlbumControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-02-04T21:32:07.756-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-04T21:32:07.806-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-04T21:32:08.084-04:00  WARN 4600 --- [seplag-backend-test] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 2504dab0-4d3b-4c83-b56e-8cb1b9b59fc3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-02-04T21:32:08.092-04:00  INFO 4600 --- [seplag-backend-test] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-04T21:32:08.191-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-04T21:32:08.191-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-04T21:32:08.192-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-02-04T21:32:08.220-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.AlbumControllerTest     : Started AlbumControllerTest in 1.642 seconds (process running for 4.45)
+2026-02-04T21:32:08.342-04:00  WARN 4600 --- [seplag-backend-test] [           main] ration$PageModule$WarningLoggingModifier : Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.385 s -- in Testes do AlbumController
+[INFO] Running Testes do ArtistaController
+2026-02-04T21:32:08.478-04:00  INFO 4600 --- [seplag-backend-test] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.tocadiscojp.seplagbackend.controller.ArtistaControllerTest]: ArtistaControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-04T21:32:08.487-04:00  INFO 4600 --- [seplag-backend-test] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.tocadiscojp.seplagbackend.SeplagBackendApplication for test class com.tocadiscojp.seplagbackend.controller.ArtistaControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.10)
+
+2026-02-04T21:32:08.507-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.ArtistaControllerTest   : Starting ArtistaControllerTest using Java 17.0.17 with PID 4600 (started by jpedr in C:\Users\jpedr\Documents\ProjetoCodigo\Pessoal\seplag-backend)
+2026-02-04T21:32:08.507-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.ArtistaControllerTest   : No active profile set, falling back to 1 default profile: "default"
+2026-02-04T21:32:08.660-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-04T21:32:08.662-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-04T21:32:08.702-04:00  WARN 4600 --- [seplag-backend-test] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: b6392a89-5852-48d4-b6d3-2c3ae6463e6e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-02-04T21:32:08.703-04:00  INFO 4600 --- [seplag-backend-test] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-04T21:32:08.712-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-04T21:32:08.712-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-04T21:32:08.712-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-02-04T21:32:08.717-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.ArtistaControllerTest   : Started ArtistaControllerTest in 0.229 seconds (process running for 4.947)
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.288 s -- in Testes do ArtistaController
+[INFO] Running Testes do AuthenticationController
+2026-02-04T21:32:08.767-04:00  INFO 4600 --- [seplag-backend-test] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.tocadiscojp.seplagbackend.controller.AuthenticationControllerTest]: AuthenticationControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-04T21:32:08.777-04:00  INFO 4600 --- [seplag-backend-test] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.tocadiscojp.seplagbackend.SeplagBackendApplication for test class com.tocadiscojp.seplagbackend.controller.AuthenticationControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.10)
+
+2026-02-04T21:32:08.795-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.c.AuthenticationControllerTest     : Starting AuthenticationControllerTest using Java 17.0.17 with PID 4600 (started by jpedr in C:\Users\jpedr\Documents\ProjetoCodigo\Pessoal\seplag-backend)
+2026-02-04T21:32:08.795-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.c.AuthenticationControllerTest     : No active profile set, falling back to 1 default profile: "default"
+2026-02-04T21:32:08.960-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-04T21:32:08.962-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-04T21:32:08.997-04:00  WARN 4600 --- [seplag-backend-test] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 4d300dca-7334-4fc7-934d-62b5a7146ad2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-02-04T21:32:08.997-04:00  INFO 4600 --- [seplag-backend-test] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-04T21:32:09.005-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-04T21:32:09.005-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-04T21:32:09.005-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-02-04T21:32:09.009-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.c.AuthenticationControllerTest     : Started AuthenticationControllerTest in 0.23 seconds (process running for 5.239)
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.268 s -- in Testes do AuthenticationController
+[INFO] Running Testes do RegionalController
+2026-02-04T21:32:09.040-04:00  INFO 4600 --- [seplag-backend-test] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.tocadiscojp.seplagbackend.controller.RegionalControllerTest]: RegionalControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-02-04T21:32:09.045-04:00  INFO 4600 --- [seplag-backend-test] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.tocadiscojp.seplagbackend.SeplagBackendApplication for test class com.tocadiscojp.seplagbackend.controller.RegionalControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::               (v3.5.10)
+
+2026-02-04T21:32:09.061-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.RegionalControllerTest  : Starting RegionalControllerTest using Java 17.0.17 with PID 4600 (started by jpedr in C:\Users\jpedr\Documents\ProjetoCodigo\Pessoal\seplag-backend)
+2026-02-04T21:32:09.061-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.RegionalControllerTest  : No active profile set, falling back to 1 default profile: "default"
+2026-02-04T21:32:09.221-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-02-04T21:32:09.228-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-02-04T21:32:09.279-04:00  WARN 4600 --- [seplag-backend-test] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7e9044d9-53f1-4be6-9386-0d31191e0432
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-02-04T21:32:09.280-04:00  INFO 4600 --- [seplag-backend-test] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-02-04T21:32:09.291-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-02-04T21:32:09.291-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-02-04T21:32:09.291-04:00  INFO 4600 --- [seplag-backend-test] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 0 ms
+2026-02-04T21:32:09.297-04:00  INFO 4600 --- [seplag-backend-test] [           main] c.t.s.controller.RegionalControllerTest  : Started RegionalControllerTest in 0.249 seconds (process running for 5.527)
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.291 s -- in Testes do RegionalController
+[INFO] Running com.tocadiscojp.seplagbackend.SeplagBackendApplicationTests
+[WARNING] Tests run: 1, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0 s -- in com.tocadiscojp.seplagbackend.SeplagBackendApplicationTests
+[INFO] Running Testes do AlbumService
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.279 s -- in Testes do AlbumService
+[INFO] Running Testes do ArtistaService
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in Testes do ArtistaService
+[INFO] Running Testes do AuthorizationService
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in Testes do AuthorizationService
+[INFO] Running Testes do MinioService
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in Testes do MinioService
+[INFO] Running Testes do RateLimitService
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in Testes do RateLimitService
+[INFO] Running Testes do RegionalIntegrationService
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.168 s -- in Testes do RegionalIntegrationService
+[INFO] Running Testes do RegionalService
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.077 s -- in Testes do RegionalService
+[INFO] Running Testes do TokenService
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.078 s -- in Testes do TokenService
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 81, Failures: 0, Errors: 0, Skipped: 1
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.961 s
+[INFO] Finished at: 2026-02-04T21:32:10-04:00
+[INFO] ------------------------------------------------------------------------
